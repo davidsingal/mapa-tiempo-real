@@ -6,6 +6,7 @@ var http = require('http');
 var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
+var port = process.env.VCAP_APP_PORT || 5000; //AppFog usa este puerto
 
 //Configuramos, ver http://expressjs.com/api.html
 app.configure(function() {
@@ -22,14 +23,15 @@ app.get('/', function(req, res) {
 });
 
 //Sockets io, ver http://socket.io/
+io.set('transports', ['xhr-polling']); //AppFog usa Nginx
 io.sockets.on('connection', function(socket) {
     socket.on('send:coords', function (data) {
         console.log(data);
-        socket.emit('load:coords', data);
+        socket.broadcast.emit('load:coords', data);
     });
 });
 
 //Creamos servidor
-server.listen(3000, function() {
-    console.log('Servidor funcionando en http://localhost:3000');
+server.listen(port, function() {
+    console.log('Servidor funcionando en http://localhost:' + port);
 });

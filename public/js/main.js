@@ -37,6 +37,7 @@ function onDocumentReady() {
 	}
 
 	function onLoadCoords(coord) {
+		console.log(coord);
 		var userMarker = L.marker([coord.lat, coord.lng]);
 		userMarker.addTo(map);
 	}
