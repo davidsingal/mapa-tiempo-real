@@ -1,0 +1,13 @@
+{
+    "name": "demo-realtime-geolocation",
+    "version": "0.0.1",
+    "author": "David Inga",
+    "scripts": {
+        "start": "node app"
+    },
+    "dependencies": {
+        "express": "3.1.0",
+        "jade": "*",
+        "socket.io": "*"
+    }
+}

@@ -1,0 +1,26 @@
+body {
+	background: #222;
+	font-size: 1em;
+	color: #333;
+}
+h1 {
+	position: relative;
+	background: #eee;
+	-webkit-box-shadow: 1px 0 3px rgba(0, 0, 0, .3);
+	-moz-box-shadow: 1px 0 3px rgba(0, 0, 0, .3);
+	box-shadow: 1px 0 3px rgba(0, 0, 0, .3);
+	font-size: 1em;
+	line-height: 1;
+	padding: .5em;
+	margin: 0;
+	text-align: center;
+	text-shadow: 1px 1px 0 #fff;
+	z-index: 9999;
+}
+#map {
+	position: absolute;
+	top: 2em;
+	font-size: 1em;
+	bottom: 0;
+	width: 100%;
+}
