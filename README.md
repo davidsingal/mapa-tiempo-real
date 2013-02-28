@@ -1,4 +1,7 @@
-map-gelocation-realtime
-=======================
+##Instalación
 
-Demo representación en tiempo real de geolocalización en un map
+`npm install -d`
+
+##Comenzar aplicación
+
+`node app`
