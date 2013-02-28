@@ -24,16 +24,21 @@ function onDocumentReady() {
 		enableHighAccuracy: true
 	});
 
-	map.on('locationfound', function(position) {
-		//Creamos marker para ponerlo en nuestra posición
-		var marker = L.marker([position.latlng.lat, position.latlng.lng]);
-		marker.addTo(map);
-		socket.emit('send:coords', position.latlng);
-	});
+	map.on('locationfound', onLocationFound);
 
-	socket.on('load:coords', function(coords) {
-		console.log(coords);
-	});
+	socket.on('load:coords', onLoadCoords);
+
+	function onLocationFound(position) {
+		//Creamos marker para ponerlo en nuestra posición
+		var myPosition = L.marker([position.latlng.lat, position.latlng.lng]);
+		myPosition.addTo(map);
+		socket.emit('send:coords', position.latlng);
+	}
+
+	function onLoadCoords(coord) {
+		var userMarker = L.marker([coord.lat, coord.lng]);
+		userMarker.addTo(map);
+	}
 }
 
 $(document).on('ready', onDocumentReady);
