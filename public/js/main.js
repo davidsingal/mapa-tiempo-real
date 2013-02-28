@@ -1,3 +1,14 @@
+function onLocationFound(position) {
+	var myPosition = L.marker([position.latlng.lat, position.latlng.lng]);
+	myPosition.addTo(map);
+	socket.emit('send:coords', position.latlng);
+}
+
+function onLoadCoords(coord) {
+	var userMarker = L.marker([coord.lat, coord.lng]);
+	userMarker.addTo(map);
+}
+
 function onDocumentReady() {
 	//Cargamos socket
 	var socket = io.connect('/');
@@ -24,21 +35,11 @@ function onDocumentReady() {
 		enableHighAccuracy: true
 	});
 
+	//Creamos marker para ponerlo en nuestra posición
 	map.on('locationfound', onLocationFound);
 
+	//Creamos marker cuando nos llega una coordenada
 	socket.on('load:coords', onLoadCoords);
-
-	function onLocationFound(position) {
-		//Creamos marker para ponerlo en nuestra posición
-		var myPosition = L.marker([position.latlng.lat, position.latlng.lng]);
-		myPosition.addTo(map);
-		socket.emit('send:coords', position.latlng);
-	}
-
-	function onLoadCoords(coord) {
-		var userMarker = L.marker([coord.lat, coord.lng]);
-		userMarker.addTo(map);
-	}
 }
 
 $(document).on('ready', onDocumentReady);
