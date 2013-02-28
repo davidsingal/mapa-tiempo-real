@@ -1,4 +1,7 @@
 function onDocumentReady() {
+	//Cargamos socket
+	var socket = io.connect('/');
+
 	//Coordenada inicial
 	var Madrid = [40.416944, -3.703611];
 
@@ -16,7 +19,21 @@ function onDocumentReady() {
 
 	layer.addTo(map);
 
-	//Geolocalización, ver 
+	//Geolocalización, ver http://leafletjs.com/reference.html#map-locate-options
+	map.locate({
+		enableHighAccuracy: true
+	});
+
+	map.on('locationfound', function(position) {
+		//Creamos marker para ponerlo en nuestra posición
+		var marker = L.marker([position.latlng.lat, position.latlng.lng]);
+		marker.addTo(map);
+		socket.emit('send:coords', position.latlng);
+	});
+
+	socket.on('load:coords', function(coords) {
+		console.log(coords);
+	});
 }
 
 $(document).on('ready', onDocumentReady);

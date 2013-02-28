@@ -1,11 +1,13 @@
-//Cargamos módulos de node
+//Cargamos módulos Node
 var express = require('express');
-var io = require('socket.io');
+var http = require('http');
 
-//Creamos aplicación
+//Creamos aplicación y sockets
 var app = express();
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 
-//Configuramos
+//Configuramos, ver http://expressjs.com/api.html
 app.configure(function() {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
@@ -19,7 +21,15 @@ app.get('/', function(req, res) {
     });
 });
 
+//Sockets io, ver http://socket.io/
+io.sockets.on('connection', function(socket) {
+    socket.on('send:coords', function (data) {
+        console.log(data);
+        socket.emit('load:coords', data);
+    });
+});
+
 //Creamos servidor
-app.listen(3000, function() {
+server.listen(3000, function() {
     console.log('Servidor funcionando en http://localhost:3000');
 });
