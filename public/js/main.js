@@ -24,10 +24,40 @@ function onDocumentReady() {
 	// Añdimos el layer creado al mapa
 	layer.addTo(map);
 
-	// Geolocalizamos al usuario, ver http://leafletjs.com/reference.html#map-locate-options
-	map.locate({
-		enableHighAccuracy: true
+	// Variables de usuario
+	var username = null;
+	var $form = $('form');
+
+	// Preguntamos usuario de Twitter para localizarle
+	$form.on('submit', function(e) {
+		e.preventDefault();
+		
+		var $this = $(this);
+
+		username = $('#username').val();
+
+		if (username && username !== '' && username !== '@') {
+			// Geolocalizamos al usuario, ver http://leafletjs.com/reference.html#map-locate-options
+			map.locate({
+				enableHighAccuracy: true
+			});
+
+			$form.fadeOut('fast');
+		}
 	});
+
+	// Ocultar formulario
+	$('#close').on('click', function(e) {
+		e.preventDefault();
+		$form.fadeOut();
+	});
+
+	// Cargamos usuarios si existen
+	if (users.length > 0) {
+		for (var i = 0, len = users.length; i < len; i++) {
+			showUser(users[i].name, users[i].coords);
+		}
+	}
 
 	// Creamos marker para ponerlo en nuestra posición
 	map.on('locationfound', onLocationFound);
@@ -36,36 +66,29 @@ function onDocumentReady() {
 	socket.on('load:coords', onLoadCoords);
 
 	function onLocationFound(position) {
-		// Preguntamos usuario de Twitter
-		var name = window.prompt('Introduce tu usuario de twitter', '@');
-		if (!name || name === '') name = 'anonymous';
+		
 		var coords = [position.latlng.lat, position.latlng.lng];
 
-		createUser(name, coords);
+		showUser(username, coords);
 
 		socket.emit('send:coords', {
-			name: name,
+			name: username,
 			coords: coords
-		});
+		});		
 	}
 
 	function onLoadCoords(data) {
-		createUser(data.name, data.coords);
+		if (data) {
+			showUser(data.name, data.coords);
+		}		
 	}
 
-	function onLoadUsers(users) {
-		if (users.length > 0) return false;
-		for (var i = 0, len = users.length; i < len; i++) {
-			createUser(user[i].name, user[i].coords);
-		}
-	}
-
-	function createUser(name, coords) {
+	function showUser(name, coords) {
 		var user = {
 			name: name,
 			coords: coords
 		};
-		var marker = L.marker(coords);
+		var marker = L.marker(user.coords);
 		marker.addTo(map);
 		marker.bindPopup(user.name);
 	}

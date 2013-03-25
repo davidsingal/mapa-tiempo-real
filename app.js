@@ -22,7 +22,7 @@ app.configure(function() {
 app.get('/', function(req, res) {
     res.render('index', {
         'title': 'Mapa en tiempo real',
-        'users': users // 
+        'users': users
     });
 });
 
@@ -31,18 +31,35 @@ io.set('transports', ['xhr-polling']); //AppFog usa Nginx
 io.sockets.on('connection', function(socket) {
     // Escuchamos datos
     socket.on('send:coords', function (data) {
-        var user = {
-            name: data.name,
-            coords: data.coords
-        };
 
-        // Almacenamos el usuario
-        users.push(user);
+    	//Comprobamos si existe el usuario
+    	var check = checkUser(data.name);
 
-        // Enviamos usuarios a front
-        socket.broadcast.emit('load:coords', user);
+    	if (check) {
+    		var user = {
+	            name: data.name,
+	            coords: data.coords
+	        };
+
+	        // Almacenamos el usuario
+	        users.push(user);
+
+	        // Enviamos usuarios a front
+	        socket.broadcast.emit('load:coords', user);
+    	}
     });
 });
+
+function checkUser(name) {
+	var exist = true;
+	for (var i = 0, len = users.length; i < len; i++) {
+    	if (users[i].name === name) {
+    		exist = false;
+    		return exist;
+    	}
+    }
+    return exist;
+}
 
 //Iniciamos servidor
 server.listen(port);
