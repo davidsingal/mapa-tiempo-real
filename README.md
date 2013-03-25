@@ -39,13 +39,13 @@ Recuerda que debes tener instalado y configurado Git.
 2.	Descomprimelo en la carpeta donde desees guardar el proyecto.
 
 
-###Instalación
+###2. Instalación
 Recuerda que para este paso debes tener instalado Node Js. Para instalar tenemos que entrar en la carpeta donde está el proyecto, en nuestro ejemplo seria /mapa-tiempo-real, y ejecutamos:
 
 	npm install
 
 
-###Comenzar aplicación
+###3 .Comenzar aplicación
 El siguiente código creara un servidor web en [http://localhost:5000](http://localhost:5000):
 
 	node app
