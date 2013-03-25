@@ -1,5 +1,9 @@
 extends layout
 
+block js
+	script
+		var users = !{JSON.stringify(users)};
+
 block main
 	h1= title
 	div(id="map")
