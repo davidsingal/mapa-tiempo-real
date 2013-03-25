@@ -7,16 +7,15 @@ El código está bien comentado y espero que bien explicado, en caso de dudas, n
 
 ##Librerías utilizadas
 
-1.	[Node Js](http://nodejs.org/)
-2.	[Express Js](http://expressjs.com/)
-3.	[Socket IO](http://socket.io/)
-4.	[Leaflet Js](http://leafletjs.com/)
+*	[Node Js](http://nodejs.org/)
+*	[Express Js](http://expressjs.com/)
+*	[Socket IO](http://socket.io/)
+*	[Leaflet Js](http://leafletjs.com/)
 
 
 ##Requisitos
 
-1.	Tener instalado Node, podéis descargaroslo desde aquí: [http://nodejs.org/download/](http://nodejs.org/download/)
-2.	Tener instalado y configurado Github, hay montones de tutoriales y vídeos, dejo un enlace de todas formas: [http://git-scm.com/book/es/Empezando-Instalando-Git](http://git-scm.com/book/es/Empezando-Instalando-Git)
+Tener instalado Node, podéis descargaroslo desde aquí: [http://nodejs.org/download/](http://nodejs.org/download/).
 
 
 ##¡Empezamos!
@@ -24,7 +23,7 @@ El código está bien comentado y espero que bien explicado, en caso de dudas, n
 Tenemos dos formas de descargarnos el proyecto:
 
 ####Git
-Recuerda que debes tener instalado y configurado Git.
+Recuerda que debes tener instalado y configurado Github, hay montones de tutoriales y vídeos, dejo un enlace de todas formas [http://git-scm.com/book/es/Empezando-Instalando-Git](http://git-scm.com/book/es/Empezando-Instalando-Git):
 
 1.	Abrimos la consola o terminal.
 2.	Nos vamos a la ruta donde queramos guardar el proyecto.
@@ -50,6 +49,12 @@ El siguiente código creara un servidor web en [http://localhost:5000](http://lo
 
 	node app
 
+
+##¿Quieres más?
+Te recomiendo visitar:
+
+*	[CartoDB](http://cartodb.com)
+*	[MapBox](httep://mapbox.com)
 
 ##Agradecimientos
 
