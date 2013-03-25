@@ -33,9 +33,9 @@ io.sockets.on('connection', function(socket) {
     socket.on('send:coords', function (data) {
 
     	//Comprobamos si existe el usuario
-    	var check = checkUser(data.name);
+    	var exist = checkUser(data.name);
 
-    	if (check) {
+    	if (!exist) {
     		var user = {
 	            name: data.name,
 	            coords: data.coords
@@ -44,21 +44,19 @@ io.sockets.on('connection', function(socket) {
 	        // Almacenamos el usuario
 	        users.push(user);
 
-	        // Enviamos usuarios a front
+	        // Enviamos usuario a front
 	        socket.broadcast.emit('load:coords', user);
     	}
     });
 });
 
 function checkUser(name) {
-	var exist = true;
 	for (var i = 0, len = users.length; i < len; i++) {
     	if (users[i].name === name) {
-    		exist = false;
-    		return exist;
+    		return false;
     	}
     }
-    return exist;
+    return true;
 }
 
 //Iniciamos servidor
