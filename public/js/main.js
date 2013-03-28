@@ -21,7 +21,7 @@ function onDocumentReady() {
 		maxZoom: 18
 	});
 
-	// Añdimos el layer creado al mapa
+	// Añadimos el layer creado al mapa
 	layer.addTo(map);
 
 	// Variables de usuario
