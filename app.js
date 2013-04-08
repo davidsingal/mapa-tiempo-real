@@ -6,7 +6,7 @@ var http = require('http');
 var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
-var port = process.env.VCAP_APP_PORT || 5000; //AppFog usa este puerto
+var port = process.env.VCAP_APP_PORT || 3000; //AppFog usa este puerto, por defecto 3000
 
 // Almacén de usuarios
 var users = [];
