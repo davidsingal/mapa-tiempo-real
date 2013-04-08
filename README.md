@@ -29,7 +29,7 @@ Recuerda que debes tener instalado y configurado Github, hay montones de tutoria
 2.	Nos vamos a la ruta donde queramos guardar el proyecto.
 3.	Ejecutamos el siguiente codigo
 
-	`git clone git@github.com:davidsingal/mapa-tiempo-real.git`
+	`git clone git@github.com:davidsingal/mapa-tiempo-real-bonus.git`
 	
 	Esto creará una carpeta llamada mapa-tiempo-real con todo el proyecto.
 	
